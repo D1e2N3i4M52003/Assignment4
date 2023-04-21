@@ -1,5 +1,6 @@
 package model;
 
+<<<<<<< Updated upstream
 import interfaces.TakeAccess;
 
 import java.util.ArrayList;
@@ -46,4 +47,7 @@ public class TreasureRoom implements TakeAccess {
     catch (InterruptedException e) {/* empty*/ }
   }
 
+=======
+public class TreasureRoom {
+>>>>>>> Stashed changes
 }
