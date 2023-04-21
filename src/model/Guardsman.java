@@ -1,8 +1,12 @@
-package readersWriters;
+package model;
+
+import interfaces.Door;
+import interfaces.*;
+import model.ReadProxy;
 
 import java.util.ArrayList;
 
-public class Guardsman implements Door{
+public class Guardsman implements Door {
   //countkingaccountant takeking addvaluablertres
   private int readers;
   private int writers;

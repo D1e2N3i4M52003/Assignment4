@@ -1,4 +1,8 @@
-package readersWriters;
+package model;
+
+import interfaces.Door;
+import interfaces.EnterAccess;
+import singleton.*;
 
 public class Accountant implements Runnable{ // Accountant is a reader
 
@@ -10,10 +14,8 @@ public class Accountant implements Runnable{ // Accountant is a reader
 	public void run() {
 		while(true) {
 			EnterAccess list = door.acquireRead();
-			list.count();
-			LogLine logLine = new LogLine(list.count().toString());
 			Log log = Log.getInstance();
-			log.addToFile(logLine);
+			log.addLog(String.valueOf(list.count()));
 			door.releaseRead();
 			try
 			{

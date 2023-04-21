@@ -1,4 +1,7 @@
-package readersWriters;
+package model;
+
+import interfaces.Door;
+import interfaces.TakeAccess;
 
 import java.util.Random;
 
@@ -17,7 +20,7 @@ public class King implements Runnable{ // King is a Writer
 
 			TakeAccess list = door.acquireWrite();
 
-			if (random < list.count()) {
+			if (rand < list.count()) {
 					list.take(rand);
 				try
 				{
