@@ -1,4 +1,4 @@
-package singleton;
+package multiton;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -7,19 +7,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Log {
-	private ArrayList<LogLine> logLines;
-	private static Log instance;   //Singleton
-	private static Object lock = new Object();
 
-	private Log(){
+	private static Map <String, Log> map = new HashMap<>();
+	private ArrayList<LogLine> logLines;
+	private static Log instance;
+	private static Object lock = new Object();
+	private String filename;
+
+
+	private Log(String filename){
 		this.logLines = new ArrayList<>();
+		this.filename = filename;
 	}
 
 	public void addLog(String text){
 		LogLine newLogLine = new LogLine(text);
 		logLines.add(newLogLine);
 		addToFile(newLogLine);
-		System.out.println("Log added: " + newLogLine);
+		System.out.println("Log line added: " + newLogLine);
 	}
 
 	public ArrayList<LogLine> getALl(){
@@ -41,7 +46,7 @@ public class Log {
 		}
 		BufferedWriter out = null;
 		try{
-			String filename= "Log-" + log.getDateTime().getSortableDate()+ ".txt";
+			String filename = "Log-" + log.getDateTime().getSortableDate()+ ".txt";
 			out = new BufferedWriter(new FileWriter(filename, true));
 			out.write(log + "\n");
 		}
@@ -57,16 +62,17 @@ public class Log {
 		}
 	}
 
-	public static Log getInstance(){   //Singleton
-		if (instance == null){
-			synchronized(lock){
-				if (instance == null){
-					instance = new Log();
+	public static Log getInstance(String key){
+		Log log = map.get(key);
+		if (log == null){
+			synchronized (lock){
+				log = map.get(key);
+				if (log == null){
+					log = new Log(key);
+					map.put(key, log);
 				}
 			}
 		}
-		return instance;
+		return log;
 	}
 }
-
-
