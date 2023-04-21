@@ -33,21 +33,73 @@ public class Guardsman implements Door{
 
   @Override public EnterAccess acquireRead()
   {
-    return null;
+    while (writers > 0 || waitingWriters > 0)
+    {
+      try
+      {
+        String txt = " WAIT (readers =" + readers + ", writers=" + writers + ")";
+        System.out.println(Thread.currentThread().getName() + txt);
+
+        wait();
+      }
+      catch (InterruptedException e)
+      {
+        //
+      }
+    }
+
+    allowedReadAccess.add(Thread.currentThread());
+    readers++;
+    String txt = " READING (readers =" + readers + ", writers=" + writers + ")";
+    System.out.println(Thread.currentThread().getName() + txt);
+    return readProxy;
   }
 
   @Override public void releaseRead()
   {
 
+    readers--;
+    if (readers== 0)
+    {
+      notify(); // notify one waiting writer
+    }
+    allowedReadAccess.remove(Thread.currentThread());
+    String txt = " FINISHED READING (readers= "+ readers + ", writers=" + writers + ")";
+    System.out.println(Thread.currentThread().getName() + txt);
+
   }
 
   @Override public TakeAccess acquireWrite()
   {
-    return null;
+    waitingWriters++;
+
+    while (readers > 0 || writers > 0)
+    {
+      try
+      {
+        String txt = " WAIT (readers= "+ readers + ", writers=" + writers + ")";
+        System.out.println(Thread.currentThread().getName() + txt);
+        wait();
+      }
+      catch (Exception e)
+      {
+        //
+      }
+    }
+    allowedWriteAccess.add(Thread.currentThread());
+    waitingWriters--; // writer preference
+    writers++;
+    String txt = " WRITING (readers= "+ readers + ", writers=" + writers + ")";
+    System.out.println(Thread.currentThread().getName() + txt);
+    return writeProxy;
   }
 
   @Override public void releaseWrite()
   {
-
+    writers--;
+    allowedWriteAccess.remove(Thread.currentThread());
+    notifyAll(); // notify all waiting readers
+    String txt = " FINISHED WRITING (readers= "+ readers + ", writers=" + writers + ")";
+    System.out.println(Thread.currentThread().getName() + txt);
   }
 }
