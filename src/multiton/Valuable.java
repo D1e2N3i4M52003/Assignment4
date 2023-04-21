@@ -1,4 +1,6 @@
 package multiton;
 
-public class Valuable {
+public class Valuable
+{
+    
 }
