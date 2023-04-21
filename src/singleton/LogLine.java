@@ -1,3 +1,5 @@
+package singleton;
+
 public class LogLine {
 	private String text;
 	private DateTime dateTime;
