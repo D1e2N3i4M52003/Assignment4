@@ -1,2 +1,6 @@
-public class Mine {
+package model;
+
+public class Mine
+{
+
 }
