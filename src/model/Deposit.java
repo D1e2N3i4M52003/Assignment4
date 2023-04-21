@@ -1,5 +1,6 @@
 package model;
 
+import multiton.Ore;
 import multiton.Valuable;
 
 import java.util.ArrayList;
@@ -11,21 +12,11 @@ public class Deposit {
 		this.valuables = new ArrayList<>();
 	}
 
-	public synchronized void addValuable(Valuable valuable){
-		valuables.add(valuable);
+	public synchronized void addValuable(){
+		valuables.add(Mine.mine());
 	}
 
-	public synchronized void takeValuable(String type){
-		for (int i = 0; i < valuables.size(); i++){
-			if (valuables.get(i).equals(type)){
-				valuables.remove(i);
-			}
-		}
+	public synchronized void takeValuable(){
+		valuables.remove(valuables.size()-1);
 	}
-
-	public synchronized void takeNextAvailableValuable(){
-
-	}
-
-
 }
