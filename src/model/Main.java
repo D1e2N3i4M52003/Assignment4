@@ -3,6 +3,7 @@ package model;
 import model.Deposit;
 import model.Miner;
 import model.ValuableTransporter;
+import singleton.Log;
 
 public class Main {
 	public static void main(String[] args) {
@@ -14,5 +15,7 @@ public class Main {
 		Thread t2 = new Thread(transporter);
 		t1.start();
 		t2.start();
+
+
 	}
 }
