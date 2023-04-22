@@ -5,7 +5,7 @@ import multiton.Valuable;
 
 import java.util.Random;
 
-public class Mine
+public abstract class Mine
 {
     public static boolean copperMined = false;
     public static boolean ironMined = false;
