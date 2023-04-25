@@ -5,6 +5,7 @@ import multiton.Valuable;
 import singleton.Log;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Deposit {
 	private ArrayList<Valuable> valuables;
