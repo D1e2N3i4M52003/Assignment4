@@ -1,6 +1,8 @@
 package interfaces;
 
+import multiton.Valuable;
+
 public interface TakeAccess extends EnterAccess{
-  void take(int value);
-  void add(int value);
+  Valuable take();
+  void add(Valuable value);
 }

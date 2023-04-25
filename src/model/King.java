@@ -2,13 +2,17 @@ package model;
 
 import interfaces.Door;
 import interfaces.TakeAccess;
+import multiton.Valuable;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class King implements Runnable{ // King is a Writer
 	private Door door;
+	private ArrayList<Valuable> valuables;
 	public King(Door door) {
 		this.door = door;
+		this.valuables = new ArrayList<>();
 	}
 
 	@Override
@@ -21,7 +25,9 @@ public class King implements Runnable{ // King is a Writer
 			TakeAccess list = door.acquireWrite();
 
 			if (rand < list.count()) {
-					list.take(rand);
+				for(int i=0;i<rand;i++){
+					valuables.add(list.take());
+				}
 				try
 				{
 					Thread.sleep(10000);
@@ -30,7 +36,9 @@ public class King implements Runnable{ // King is a Writer
 				{
 					throw new RuntimeException(e);
 				}
-				list.add(rand);
+				for(int i=0;i<rand;i++){
+					list.add(valuables.remove(0));
+				}
 			}
 			door.releaseWrite();
 

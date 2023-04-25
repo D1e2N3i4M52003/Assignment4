@@ -1,6 +1,7 @@
 package model;
 
 import interfaces.TakeAccess;
+import multiton.Valuable;
 
 public class WriteProxy implements TakeAccess {
   private TreasureRoom room;
@@ -21,17 +22,17 @@ public class WriteProxy implements TakeAccess {
     throw new IllegalArgumentException("Thread doesn't have access");
   }
 
-  @Override public void take(int value) {
+  @Override public Valuable take() {
     if (access.hasWriteAccess(Thread.currentThread())) {
       if (room != null) {
-        room.take(value);
+        return room.take();
       }
       else throw new IllegalArgumentException("Null list!");
     }
     else
       throw new IllegalArgumentException("Thread doesn't have access");
   }
-  @Override public void add(int value) {
+  @Override public void add(Valuable value) {
     if (access.hasWriteAccess(Thread.currentThread())) {
       if (room != null) {
         room.add(value);

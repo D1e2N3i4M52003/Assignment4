@@ -1,11 +1,12 @@
 package model;
 
 import interfaces.TakeAccess;
+import multiton.Valuable;
 
 import java.util.ArrayList;
 
 public class TreasureRoom implements TakeAccess {
-	private ArrayList<Integer> list;
+	private ArrayList<Valuable> list;
 	private int secondsToCount;
 	private int secondsToTake;
 
@@ -22,22 +23,14 @@ public class TreasureRoom implements TakeAccess {
 	}
 
 	@Override
-	public void take(int value) {
-		if (value < list.size()) {
-			for (int i = 0; i < value; i++) {
-				list.remove(0);
-			}
-		}
+	public Valuable take() {
 		simulateThatItTakesTime(secondsToTake);
+		return list.remove(0);
 	}
 
 	@Override
-	public void add(int value) {
-		if (value > 0) {
-			for (int i = 0; i < value; i++) {
-				list.add(value);
-			}
-		}
+	public void add(Valuable value) {
+		list.add(value);
 		simulateThatItTakesTime(secondsToTake);
 	}
 
