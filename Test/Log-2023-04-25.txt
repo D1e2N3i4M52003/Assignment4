@@ -1,0 +1,9 @@
+Text: Miner is workingTime: 25/04/2023 11:35:38
+Text: Valuable transporter is workingTime: 25/04/2023 11:35:38
+Text: Miner is workingTime: 25/04/2023 11:37:10
+Text: Miner is workingTime: 25/04/2023 11:37:10
+Text: Miner is workingTime: 25/04/2023 11:37:10
+Text: Valuable transporter is workingTime: 25/04/2023 11:37:10
+Text: Valuable transporter is workingTime: 25/04/2023 11:37:10
+Text: Valuable transporter is workingTime: 25/04/2023 11:37:10
+Text: Miner is workingTime: 25/04/2023 11:38:53
