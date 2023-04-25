@@ -20,8 +20,12 @@ public class Deposit {
 		Log.getInstance().addLog("Miner is working");
 	}
 
-	public synchronized void takeValuable(){
-		valuables.remove(valuables.size()-1);
+	public synchronized Valuable takeValuable(){
 		Log.getInstance().addLog("Valuable transporter is working");
+		return valuables.remove(valuables.size()-1);
+	}
+
+	public int getSizeOfValuables(){
+		return valuables.size();
 	}
 }

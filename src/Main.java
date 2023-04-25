@@ -1,12 +1,10 @@
-package model;
-
-import model.Deposit;
-import model.Miner;
-import model.ValuableTransporter;
+import model.*;
 import singleton.Log;
 
 public class Main {
 	public static void main(String[] args) {
+		TreasureRoom treasureRoom = new TreasureRoom(1, 2);
+		Guardsman guardsman = new Guardsman(treasureRoom);
 		Deposit deposit = new Deposit();
 		ValuableTransporter transporter = new ValuableTransporter(deposit);
 		Miner miner = new Miner(deposit);
