@@ -3,6 +3,7 @@ package model;
 import interfaces.Door;
 import interfaces.*;
 import model.ReadProxy;
+import singleton.Log;
 
 import java.util.ArrayList;
 
@@ -41,21 +42,17 @@ public class Guardsman implements Door {
     {
       try
       {
-        String txt = " WAIT (readers =" + readers + ", writers=" + writers + ")";
-        System.out.println(Thread.currentThread().getName() + txt);
-
         wait();
       }
       catch (InterruptedException e)
       {
         //
       }
+		Log.getInstance().addLog("Guardsman let someone read");
     }
 
     allowedReadAccess.add(Thread.currentThread());
     readers++;
-    String txt = " READING (readers =" + readers + ", writers=" + writers + ")";
-    System.out.println(Thread.currentThread().getName() + txt);
     return readProxy;
   }
 
@@ -68,9 +65,7 @@ public class Guardsman implements Door {
       notify(); // notify one waiting writer
     }
     allowedReadAccess.remove(Thread.currentThread());
-    String txt = " FINISHED READING (readers= "+ readers + ", writers=" + writers + ")";
-    System.out.println(Thread.currentThread().getName() + txt);
-
+	  Log.getInstance().addLog("Guardsman kicked the reader out");
   }
 
   @Override public TakeAccess acquireWrite()
@@ -79,22 +74,18 @@ public class Guardsman implements Door {
 
     while (readers > 0 || writers > 0)
     {
-      try
-      {
-        String txt = " WAIT (readers= "+ readers + ", writers=" + writers + ")";
-        System.out.println(Thread.currentThread().getName() + txt);
+      try{
         wait();
       }
       catch (Exception e)
       {
         //
       }
+		Log.getInstance().addLog("Guardsman let someone acquire the write");
     }
     allowedWriteAccess.add(Thread.currentThread());
     waitingWriters--; // writer preference
     writers++;
-    String txt = " WRITING (readers= "+ readers + ", writers=" + writers + ")";
-    System.out.println(Thread.currentThread().getName() + txt);
     return writeProxy;
   }
 
@@ -103,7 +94,6 @@ public class Guardsman implements Door {
     writers--;
     allowedWriteAccess.remove(Thread.currentThread());
     notifyAll(); // notify all waiting readers
-    String txt = " FINISHED WRITING (readers= "+ readers + ", writers=" + writers + ")";
-    System.out.println(Thread.currentThread().getName() + txt);
+	  Log.getInstance().addLog("Guardsman kicked the writer out");
   }
 }

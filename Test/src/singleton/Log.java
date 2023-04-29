@@ -1,4 +1,4 @@
-package singleton;
+package src.singleton;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

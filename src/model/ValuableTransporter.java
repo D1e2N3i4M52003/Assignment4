@@ -3,6 +3,7 @@ package model;
 import interfaces.Door;
 import interfaces.TakeAccess;
 import multiton.Valuable;
+import singleton.Log;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -34,6 +35,8 @@ public class ValuableTransporter implements Runnable{
 				for (int i = 0; i < randomNumber; i++){
 					valuablesThatTransporterHas.add(deposit.takeValuable());
 				}
+				Log.getInstance().addLog("Valuable transporter has finished his work");
+
 			}
 			catch (IndexOutOfBoundsException exception){
 				System.out.println("Valuable transported has taken" + randomNumber + " valuables from deposit. ERROR: " + exception.getMessage());

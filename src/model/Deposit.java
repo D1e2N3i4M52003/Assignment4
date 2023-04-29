@@ -17,11 +17,9 @@ public class Deposit {
 
 	public synchronized void addValuable(){
 		valuables.add(Mine.mine());
-		Log.getInstance().addLog("Miner is working");
 	}
 
 	public synchronized Valuable takeValuable(){
-		Log.getInstance().addLog("Valuable transporter is working");
 		return valuables.remove(valuables.size()-1);
 	}
 

@@ -1,3 +1,7 @@
+package Test;
+
+import model.Deposit;
+import model.Mine;
 import multiton.Valuable;
 import org.junit.jupiter.api.*;
 
@@ -29,7 +33,7 @@ E: (already tested in Z and B)
 
   @Test void addZero()
   {
-    assertThrows(IllegalArgumentException.class, ()->deposit.addValuable());
+    assertDoesNotThrow(()->deposit.addValuable());
   }
 
   @Test void addOne1()

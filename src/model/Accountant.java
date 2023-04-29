@@ -16,6 +16,7 @@ public class Accountant implements Runnable{ // Accountant is a reader
 			EnterAccess list = door.acquireRead();
 			Log log = Log.getInstance();
 			log.addLog(String.valueOf(list.count()));
+			Log.getInstance().addLog("Accountant has done his work");
 			door.releaseRead();
 			try
 			{

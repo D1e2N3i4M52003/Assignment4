@@ -1,4 +1,4 @@
-package multiton;
+package src.multiton;
 
 public enum Ore
 {

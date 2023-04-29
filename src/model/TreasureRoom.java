@@ -2,6 +2,7 @@ package model;
 
 import interfaces.TakeAccess;
 import multiton.Valuable;
+import singleton.Log;
 
 import java.util.ArrayList;
 

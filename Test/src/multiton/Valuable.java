@@ -1,4 +1,4 @@
-package multiton;
+package src.multiton;
 
 import java.util.HashMap;
 import java.util.Map;

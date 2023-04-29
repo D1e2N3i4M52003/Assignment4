@@ -2,6 +2,7 @@ package model;
 
 import multiton.Ore;
 import multiton.Valuable;
+import singleton.Log;
 
 public class Miner implements Runnable{
 
@@ -20,6 +21,7 @@ public class Miner implements Runnable{
 				throw new RuntimeException(e);
 			}
 			System.out.println("A new valuable is added");
+			Log.getInstance().addLog("Miner has stopped working");
 		}
 	}
 }

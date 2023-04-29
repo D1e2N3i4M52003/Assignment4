@@ -3,6 +3,7 @@ package model;
 import interfaces.Door;
 import interfaces.TakeAccess;
 import multiton.Valuable;
+import singleton.Log;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -28,6 +29,7 @@ public class King implements Runnable{ // King is a Writer
 				for(int i=0;i<rand;i++){
 					valuables.add(list.take());
 				}
+				Log.getInstance().addLog("King is throwing a party");
 				try
 				{
 					Thread.sleep(10000);
@@ -40,6 +42,7 @@ public class King implements Runnable{ // King is a Writer
 					list.add(valuables.remove(0));
 				}
 			}
+
 			door.releaseWrite();
 
 		}

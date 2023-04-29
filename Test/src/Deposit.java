@@ -1,3 +1,5 @@
+package src;
+
 import multiton.Valuable;
 import singleton.Log;
 
